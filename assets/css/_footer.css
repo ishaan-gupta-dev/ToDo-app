@@ -1,0 +1,11 @@
+/* Customization for footer */
+footer{
+    font-family: 'Times New Roman',Times,serif;
+    font-weight: normal;
+    text-align:right;
+    padding-top: 20px;
+    margin: 0 auto;
+    max-width: 700px;
+    height: 80px;
+    background-color: lightblue;
+}

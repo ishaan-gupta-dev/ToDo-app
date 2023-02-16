@@ -1,0 +1,117 @@
+<!-- home view -->
+<link rel="stylesheet" href="/css/home.css" />
+<!-- main container where all the content is shown -->
+<section id="main-container">
+  <!-- seperator -->
+  <div class="horizontal-line"></div>
+
+  <form action="/create-task" method="post">
+
+    <!-- div for description input -->
+    <div id="description-container">
+      <label for="desc-input"> description</label>
+      <input type="text" name="description" id="desc-input" placeholder="What do you need to do?" required/>
+    </div>
+
+    <!-- seperator -->
+  <div class="horizontal-line"></div>
+
+  <!-- div for data inputs (i.e: category, date and is important) -->
+  <div id="data-container">
+    <!-- div for category input -->
+    <div id="category-container">
+      <label for="category-input"> category </label>
+      <select name="category" id="category-input">
+        <option value="n/a"> Choose a category </option>
+        <option value="personal">Personal</option>
+        <option value="work">Work</option>
+        <option value="study">Study</option>
+        <option value="shopping">Shopping</option>
+        <option value="cleaning">Cleaning</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+    <!-- seperator -->
+  <div class="vertical-line"></div>
+
+    <!-- div for due-date input -->
+    <div id="due-date-container">
+      <div>
+        <label for="due-date-input">due date</label>
+        <input type="date" id="due-date-input" name="due_date" />
+      </div>
+    </div>
+
+      <!-- seperator -->
+    <div class="vertical-line"></div>
+
+
+      <!-- div for is important input -->
+      <div id="is-important-container">
+        <label for="is-important-input" id="is-important-label">Mark as important?</label>
+        <div id="is-important-input">
+          <input type="checkbox" name="is_important" id="is-important-input" value="true"/>
+        </div>  
+      </div>
+  </div>
+
+  <!-- seperator -->
+  <div class="horizontal-line"></div>
+
+  <!-- div for action buttons (i.e: add and delete buttons) -->
+  <div id="action-buttons-container">
+    <!-- add button - to add a new task and submit form -->
+      <button type="submit" id="add-task-button">
+        <i class="fa-solid fa-plus plus-icon"></i> 
+        <span>add task</span>
+      </button>
+  </form>
+  <!-- button to delete all the selected tasks -->
+    <button type="submit" id="delete-task-button" form="task-list-form">
+      <i class="fa-solid fa-trash-can delete-icon"></i> 
+      <span>delete tasks</span>
+    </button>
+  </div>
+  <!-- select all checkbox -->
+  <div id="select-all-checkbox-container">
+    <div><input type="checkbox" name="select-all" id="select-all-checkbox"></div>
+    <p>
+      <label for="select-all-checkbox">Select All</label>
+    </p>
+    
+  </div>
+  <!-- div to show list of all the tasks stored in the Database -->
+    <form action="/delete-task" method="POST" id="task-list-form">
+      <% for (let i of taskArray){ %>
+        <div>
+          <!-- seperator -->
+          <div class="horizontal-line"></div>
+
+          <div class="task-card-container">
+            <!-- checkbox to select task -->
+            <span><input id="task-check" type="checkbox" name="id" value="<%= i._id %>"></span>
+
+            <div class="task-card-data-container">
+              <!-- description of task -->
+              <p><%= i.description %></p>
+              <!-- due date -->
+              <i class="fa-regular fa-calendar-days icon"></i>
+              <span> <%= i.due_date %> </span>
+              <!-- is important -->
+              <p id="task-card-data-is-important"> 
+                <% if ( i.is_important == true) { %>
+                  Important!
+                <% }else{%>
+                  Not Important
+                <%}%>
+              </p>
+            </div>
+            <!-- category button, on click shows details of the task -->
+            <button type="button" style="background-color: <%= color_list[i.category] %>;"> <%= i.category %> </button>
+          </div>
+       </div>
+      <%}%>
+    </form>
+  </section>
+<script src="/js/home.js"></script>

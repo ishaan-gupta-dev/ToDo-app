@@ -1,0 +1,6 @@
+/* Removes default margin and set background color of page */
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: grey;
+}
